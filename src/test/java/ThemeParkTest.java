@@ -9,9 +9,7 @@ import people.Visitor;
 import stalls.IceCreamStall;
 import stalls.ParkingSpot;
 import stalls.Stall;
-
-
-
+import stalls.TobaccoStall;
 
 
 import static org.junit.Assert.assertEquals;
@@ -31,6 +29,7 @@ public class ThemeParkTest {
         attraction = new RollerCoaster("Big Roller", 30, 8.5);
         stall = new IceCreamStall("Icey Nicey", "Mr Freeze", ParkingSpot.A2, 50);
         attraction2 = new Park("Greeny McGreeny", 55);
+        stall1 = new TobaccoStall("Smoke Stack", "Dr Death", ParkingSpot.B1, 20);
 
     }
 
@@ -66,6 +65,18 @@ public class ThemeParkTest {
         themePark.addAreas(attraction);
         String result = themePark.getAreas().get(0).getName();
         assertEquals("Big Roller",result);
+
+    }
+
+    @Test
+    public void canGetAllowedAreas(){
+        themePark.addAreas(stall1);
+        themePark.addAreas(attraction);
+        themePark.addAreas(stall);
+        themePark.addAreas(attraction2);
+        themePark.getVisitorCanVisit(visitor);
+        String result = themePark.getAllowedAreas().get(0).getName();
+        assertEquals("Big Roller", result);
 
     }
 
